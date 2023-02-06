@@ -47,7 +47,6 @@ const Home = () => {
         ) : (
           <title>Weather Forecast</title>
         )}
-        <meta property="og:title" content="My page title" key="title" />
       </Head>
       {data && (
         <div className="current">
