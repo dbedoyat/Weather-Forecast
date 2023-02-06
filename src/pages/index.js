@@ -13,6 +13,7 @@ import styles from "@/styles/Home.module.scss";
 const Home = () => {
   const [data, setData] = React.useState(null);
   const [address, setAddress] = React.useState(null);
+  const [error, setError] = React.useState(false);
   const isDayorNight = GetDay();
   const FetchAddress = async () => {
     const proxy = "https://cors-anywhere.herokuapp.com/";
@@ -28,6 +29,7 @@ const Home = () => {
       );
       setData({ initialData, forecastData });
     } catch (error) {
+      setError(true);
       console.log("Hubo un problema con la petición Fetch:" + error.message);
       return "Address not valid, Please add another address";
     }
@@ -81,6 +83,12 @@ const Home = () => {
             Search
           </button>
         </div>
+        {error && (
+          <p className={styles.error}>
+            Sorry, we are unable to fetch data from this address, please, try
+            with another one.
+          </p>
+        )}
         <Weather data={data} />
       </main>
     </div>
